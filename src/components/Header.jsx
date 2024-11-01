@@ -2,11 +2,17 @@ import Logo from "../assets/logo.svg";
 import Ring from "../assets/ring.svg";
 import ShoppingCart from "../assets/shopping-cart.svg";
 import Moon from "../assets/icons/moon.svg";
-import { useState } from "react";
+import Sun from "../assets/icons/sun.svg";
+import { useContext, useState } from "react";
 import CartDetails from "./CartDetails";
+import { CartContext } from "../context/CartContext";
+import { ThemeContext } from "../context/ThemeContext";
 
 export default function Header() {
   const [showCart, setShowCart] = useState(false);
+
+  const { cartData } = useContext(CartContext);
+  const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
 
   function handleCartShow() {
     setShowCart(true);
@@ -29,12 +35,17 @@ export default function Header() {
             </a>
           </li>
           <li>
-            <a
-              className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
-              href="#"
+            <div
+              className=" cursor-pointer bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
+              onClick={() => setIsDarkMode(!isDarkMode)}
             >
-              <img src={Moon} width="24" height="24" alt="" />
-            </a>
+              <img
+                src={isDarkMode ? Sun : Moon}
+                width="24"
+                height="24"
+                alt=""
+              />
+            </div>
           </li>
           <li>
             <a
@@ -43,6 +54,11 @@ export default function Header() {
               onClick={handleCartShow}
             >
               <img src={ShoppingCart} width="24" height="24" alt="" />
+              {cartData.length > 0 && (
+                <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px]">
+                  {cartData.length}
+                </span>
+              )}
             </a>
           </li>
         </ul>
