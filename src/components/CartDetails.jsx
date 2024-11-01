@@ -7,15 +7,15 @@ import { getImgUrl } from "../utils/cineUtility";
 
 /* eslint-disable react/prop-types */
 export default function CartDetails({ onCancel }) {
-  const { cartData, setCartData } = useContext(CartContext);
+  const { cartState, dispatch } = useContext(CartContext);
 
-  function handleDeleteCartItem(e, itemId) {
+  function handleDeleteCartItem(e, item) {
     e.preventDefault();
 
-    const filteredCartItem = cartData.filter(
-      (cartItem) => cartItem.id !== itemId
-    );
-    setCartData(filteredCartItem);
+    dispatch({
+      type: "REMOVE_FROM_CART",
+      payload: item,
+    });
   }
 
   return (
@@ -27,10 +27,10 @@ export default function CartDetails({ onCancel }) {
           </h2>
 
           <div className="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14">
-            {cartData.length === 0 ? (
+            {cartState.cartData.length === 0 ? (
               <p className="text-3xl">Your cart is empty!</p>
             ) : (
-              cartData.map((item) => (
+              cartState.cartData.map((item) => (
                 <div key={item.id} className="grid grid-cols-[1fr_auto] gap-4">
                   <div className="flex items-center gap-4">
                     <img
@@ -53,7 +53,7 @@ export default function CartDetails({ onCancel }) {
                   <div className="flex justify-between gap-4 items-center">
                     <button
                       className="bg-[#D42967] rounded-md p-2 md:px-4 inline-flex items-center space-x-2 text-white"
-                      onClick={(e) => handleDeleteCartItem(e, item.id)}
+                      onClick={(e) => handleDeleteCartItem(e, item)}
                     >
                       <img className="w-5 h-5" src={Delete} alt="delete" />
                       <span className="max-md:hidden">Remove</span>

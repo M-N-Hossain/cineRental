@@ -9,7 +9,7 @@ export default function Home() {
   const { isDarkMode } = useContext(ThemeContext);
 
   return (
-    <div className={`h-full w-full ${isDarkMode ? "dark" : ""}`}>
+    <div className={`h-full w-full p-4 ${isDarkMode ? "dark" : ""}`}>
       <Header />
       <main>
         <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">

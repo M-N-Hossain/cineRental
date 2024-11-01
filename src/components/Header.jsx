@@ -11,7 +11,7 @@ import { ThemeContext } from "../context/ThemeContext";
 export default function Header() {
   const [showCart, setShowCart] = useState(false);
 
-  const { cartData } = useContext(CartContext);
+  const { cartState } = useContext(CartContext);
   const { isDarkMode, setIsDarkMode } = useContext(ThemeContext);
 
   function handleCartShow() {
@@ -54,9 +54,9 @@ export default function Header() {
               onClick={handleCartShow}
             >
               <img src={ShoppingCart} width="24" height="24" alt="" />
-              {cartData.length > 0 && (
+              {cartState.cartData.length > 0 && (
                 <span className="rounded-full absolute top-[-12px] left-[28px] bg-[#12CF6F] text-white text-center p-[2px] w-[30px] h-[30px]">
-                  {cartData.length}
+                  {cartState.cartData.length}
                 </span>
               )}
             </a>

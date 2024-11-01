@@ -9,7 +9,7 @@ export default function MovieCard({ movie }) {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
 
-  const { cartData, setCartData } = useContext(CartContext);
+  const { cartState, dispatch } = useContext(CartContext);
 
   function handleModalClose() {
     setSelectedMovie(null);
@@ -24,10 +24,13 @@ export default function MovieCard({ movie }) {
   function handleAddToCart(event, movie) {
     event.stopPropagation();
 
-    const found = cartData.find((item) => item.id === movie.id);
+    const found = cartState.cartData.find((item) => item.id === movie.id);
 
     if (!found) {
-      setCartData([...cartData, movie]);
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: { ...movie },
+      });
     } else {
       console.error(
         `The movie ${movie.title} has been added to the cart already`
