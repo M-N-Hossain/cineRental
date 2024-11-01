@@ -4,6 +4,7 @@ import { CartContext } from "../context/CartContext";
 import Delete from "../assets/delete.svg";
 import Checkout from "../assets/icons/checkout.svg";
 import { getImgUrl } from "../utils/cineUtility";
+import { toast } from "react-toastify";
 
 /* eslint-disable react/prop-types */
 export default function CartDetails({ onCancel }) {
@@ -15,6 +16,10 @@ export default function CartDetails({ onCancel }) {
     dispatch({
       type: "REMOVE_FROM_CART",
       payload: item,
+    });
+
+    toast.success(`Removed ${item.title} from the cart`, {
+      position: "bottom-right",
     });
   }
 

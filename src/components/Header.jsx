@@ -27,12 +27,11 @@ export default function Header() {
 
         <ul className="flex items-center space-x-5">
           <li>
-            <a
+            <button
               className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
-              href="#"
             >
               <img src={Ring} width="24" height="24" alt="" />
-            </a>
+            </button>
           </li>
           <li>
             <div
@@ -48,9 +47,8 @@ export default function Header() {
             </div>
           </li>
           <li>
-            <a
+            <button
               className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
-              href="#"
               onClick={handleCartShow}
             >
               <img src={ShoppingCart} width="24" height="24" alt="" />
@@ -59,7 +57,7 @@ export default function Header() {
                   {cartState.cartData.length}
                 </span>
               )}
-            </a>
+            </button>
           </li>
         </ul>
       </nav>
